@@ -43,7 +43,7 @@ const FloatingLabelInput: FC<FloatingLabelInputProps> = ({
                     onChange={onChange}
                     className={`${newInputClassName
                         ? newInputClassName : `
-                block px-2.5 pb-2.5 pt-4 w-full text-sm text-heading bg-transparent rounded-base border border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer ${inputClassName}`} 
+                block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-200 appearance-none focus:border-[#10b981] focus:outline-none focus:ring-0 peer ${inputClassName}`} 
                 `}
                     placeholder=" "
                     required={required}
