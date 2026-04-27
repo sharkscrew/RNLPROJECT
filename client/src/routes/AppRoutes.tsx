@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 import AppLayout from "../layout/AppLayout"
-import MainPage from "../pages/gender/MainPage"
+import GenderMainPage from "../pages/gender/GenderMainPage"
 import EditGenderPage from "../pages/gender/EditGenderPage"
 import DeleteGenderPage from "../pages/gender/DeleteGenderPage"
 const AppRoutes = () => {
@@ -8,7 +8,7 @@ const AppRoutes = () => {
         <>
             <Routes>
                 <Route element={<AppLayout />}>
-                    <Route path="/" element={<MainPage />} />
+                    <Route path="/" element={<GenderMainPage />} />
                     <Route path="/gender/edit" element={<EditGenderPage />} />
                     <Route path="/gender/delete" element={<DeleteGenderPage />} />
                 </Route>
