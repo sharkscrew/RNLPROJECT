@@ -8,6 +8,9 @@ interface AddGenderFormProps {
     onGenderAdded: (message: string) => void
 }
 
+const MIN_GENDER_LENGTH = 3;
+const MAX_GENDER_LENGTH = 30;
+
 const AddGenderForm: FC<AddGenderFormProps> = ({onGenderAdded}) => {
     const [loadingStore, setLoadingStore] = useState (false);
     const [gender, setGender] = useState("");
@@ -16,13 +19,30 @@ const AddGenderForm: FC<AddGenderFormProps> = ({onGenderAdded}) => {
     const handleStoreGender = async (e: FormEvent) => {
         try {
             e.preventDefault()
+            const trimmedGender = gender.trim();
+
+            if (!trimmedGender) {
+                setErrors({ gender: ["Gender field is required."] });
+                return;
+            }
+
+            if (trimmedGender.length < MIN_GENDER_LENGTH) {
+                setErrors({ gender: [`Gender must be at least ${MIN_GENDER_LENGTH} characters.`] });
+                return;
+            }
+
+            if (trimmedGender.length > MAX_GENDER_LENGTH) {
+                setErrors({ gender: [`Gender must not be greater than ${MAX_GENDER_LENGTH} characters.`] });
+                return;
+            }
 
             setLoadingStore(true)
 
-            const data = await GenderService.storeGender({gender});
+            const data = await GenderService.storeGender({gender: trimmedGender});
 
             if (data.status === 200) {
                 setGender("")
+                setErrors({});
                 onGenderAdded(data.data.message);
             } else {
                 console.error(
@@ -50,7 +70,12 @@ const AddGenderForm: FC<AddGenderFormProps> = ({onGenderAdded}) => {
                     type="text" 
                     name="gender" 
                     value={gender} 
-                    onChange={(e) => setGender(e.target.value)} 
+                    onChange={(e) => {
+                        setGender(e.target.value);
+                        if (errors.gender?.length) {
+                            setErrors((prev) => ({ ...prev, gender: undefined }));
+                        }
+                    }} 
                     required 
                     autoFocus 
                     errors={errors.gender}

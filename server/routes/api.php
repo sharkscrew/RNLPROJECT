@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(GenderController::class)->prefix('/gender')->group(function(){
     Route::post('/storeGender', 'storeGender');
+    Route::post('/storedGender', 'storeGender');
 });
 
 // Route::get('/user', function (Request $request) {

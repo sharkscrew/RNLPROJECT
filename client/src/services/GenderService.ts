@@ -3,7 +3,7 @@ import AxiosInstance from "./AxiosIntance"
 const GenderService = {
     storeGender: async (data: any) => {
         try {
-            const response = await AxiosInstance.post('/gender/storedGender', data);
+            const response = await AxiosInstance.post('/gender/storeGender', data)
             return response 
         } catch(error) {
             throw error;                
